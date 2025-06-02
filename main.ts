@@ -23,14 +23,14 @@ game.onUpdate(() => {
     // Arcade games run at 30 FPS
 });
 
-
+let fish = sprites.create(assets.image`myImage`, SpriteKind.Player)
 
 for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
-    let fish = sprites.create(assets.image`myImage`, SpriteKind.Player)
-    controller.moveSprite(fish)
-    fish.setStayInScreen(true)
     tiles.placeOnTile(fish, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
+    controller.moveSprite(fish)
+    fish.setStayInScreen(true)
+
 }
 
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
