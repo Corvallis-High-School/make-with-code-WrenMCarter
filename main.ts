@@ -23,9 +23,15 @@ game.onUpdate(() => {
     // Arcade games run at 30 FPS
 });
 
-let fish = sprites.create(assets.image`myImage`)
-controller.moveSprite(fish)
-fish.setStayInScreen(true)
+
+
+for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
+    let fish = sprites.create(assets.image`myImage`, SpriteKind.Player)
+    controller.moveSprite(fish)
+    fish.setStayInScreen(true)
+    tiles.placeOnTile(fish, value)
+    tiles.setTileAt(value, assets.tile`transparency16`)
+}
 
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(fish, assets.animation(`myAnim`), 200, true )
@@ -38,3 +44,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 tiles.setCurrentTilemap(tilemap`level`)
 
 scene.setBackgroundColor(9)
+
+let shark = sprites.create(assets.image`myImage0`, SpriteKind.Enemy)
+
