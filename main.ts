@@ -30,18 +30,21 @@ for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
     tiles.setTileAt(value, assets.tile`transparency16`)
     controller.moveSprite(fish)
     fish.setStayInScreen(true)
+    scene.cameraFollowSprite(fish)
 
 }
 
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(fish, assets.animation(`myAnim`), 200, true )
+    animation.runImageAnimation(fish, assets.animation(`myAnim`), 200, true)
 })
 
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(fish, assets.animation(`myAnim0`), 200, true )
+    animation.runImageAnimation(fish, assets.animation(`myAnim0`), 200, true)
 })
 
 tiles.setCurrentTilemap(tilemap`level`)
+
+
 
 scene.setBackgroundColor(9)
 
