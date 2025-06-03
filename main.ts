@@ -23,30 +23,21 @@ game.onUpdate(() => {
     // Arcade games run at 30 FPS
 });
 
-let fish = sprites.create(assets.image`myImage`, SpriteKind.Player)
 
-for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
-    tiles.placeOnTile(fish, value)
-    tiles.setTileAt(value, assets.tile`transparency16`)
-    controller.moveSprite(fish)
-    fish.setStayInScreen(true)
-    scene.cameraFollowSprite(fish)
-
+function finalHours(hours: number) {
+    
 }
 
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(fish, assets.animation(`myAnim`), 200, true)
-})
 
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(fish, assets.animation(`myAnim0`), 200, true)
-})
+if (game.ask("Military to Regular?")) {
+    let startHours = game.askForNumber("Hours?")
+    let minutes = game.askForString("Minutes")
+    let finalHours = startHours % 12
+    let finalTime = finalHours + ":" + minutes
+    game.splash(finalTime)
+    
+} else {
+    if (game.ask("Regular to Military?")) {
 
-tiles.setCurrentTilemap(tilemap`level`)
-
-
-
-scene.setBackgroundColor(9)
-
-let shark = sprites.create(assets.image`myImage0`, SpriteKind.Enemy)
-
+    }
+}
