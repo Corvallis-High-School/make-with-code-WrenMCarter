@@ -1,9 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/I5N-ADl2)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=19692799)
-# Make-with-Code
-Read these [Instructions](Instructions.md)
+# Time Converter
 
-# Fish Chase
-### An Underwater Tilemap Game
-
-For this project, move the fish with the arrow keys. Avoid the shark and pick up collectibles for points! Have fun!
+### This will convert regular to military and military to regular time. Please follow displayed instructions carefully
