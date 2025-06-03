@@ -25,6 +25,7 @@ game.onUpdate(() => {
 
 
 function finalHours(hours: number) {
+
     if ((hours % 12) == 0) {
         return 12
     } else {
@@ -33,6 +34,7 @@ function finalHours(hours: number) {
 }
 
 function findAMPM(hours: number) {
+
       if (hours > 11) {
         return "p.m."
     } else {
@@ -40,20 +42,46 @@ function findAMPM(hours: number) {
     }
 }
 
+function regToMil(hours: number, am: boolean) {
+
+    if (am) {
+
+        if (hours == 12) {
+            return "00"
+        } else {
+            return hours + 12
+        }
+
+    } else {
+
+        if (hours == 12) {
+            return "12"
+        } else {
+            return hours + 12
+        }
+    }
+}
+    
+
 
 if (game.ask("Military to Regular?")) {
+
     let startHours = game.askForNumber("Hours?", 2)
     let minutes = game.askForString("Minutes", 2)
     let ampm = findAMPM(startHours)
-    let finalTime = finalHours(startHours) + ":" + minutes + " " + ampm
+    let finalHoursReg = finalHours(startHours)
+    let finalTime = finalHoursReg + ":" + minutes + " " + ampm
     game.splash(finalTime)
     
 } else {
-    if (game.ask("Regular to Military?")) {
-        let startHours = game.askForNumber("Hours?", 2)
-        let minutes = game.askForString("Minutes", 2)
-        let finalampm = game.ask("A for a.m., B for p.m.")
 
-        
+    if (game.ask("Regular to Military?")) {
+        let regHours = game.askForNumber("Hours?", 2)
+        let regminutes = game.askForString("Minutes", 2)
+        let finalampm = game.ask("A for a.m., B for p.m.")
+        let milHours = regToMil(regHours, finalampm)
+        let milTime = milHours + ":" + regminutes
+        game.splash(milTime)
     }
+
 }
