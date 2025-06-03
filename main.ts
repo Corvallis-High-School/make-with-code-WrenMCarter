@@ -25,19 +25,35 @@ game.onUpdate(() => {
 
 
 function finalHours(hours: number) {
-    
+    if ((hours % 12) == 0) {
+        return 12
+    } else {
+        return hours % 12 
+    }
+}
+
+function findAMPM(hours: number) {
+      if (hours > 11) {
+        return "p.m."
+    } else {
+        return "a.m."
+    }
 }
 
 
 if (game.ask("Military to Regular?")) {
-    let startHours = game.askForNumber("Hours?")
-    let minutes = game.askForString("Minutes")
-    let finalHours = startHours % 12
-    let finalTime = finalHours + ":" + minutes
+    let startHours = game.askForNumber("Hours?", 2)
+    let minutes = game.askForString("Minutes", 2)
+    let ampm = findAMPM(startHours)
+    let finalTime = finalHours(startHours) + ":" + minutes + " " + ampm
     game.splash(finalTime)
     
 } else {
     if (game.ask("Regular to Military?")) {
+        let startHours = game.askForNumber("Hours?", 2)
+        let minutes = game.askForString("Minutes", 2)
+        let finalampm = game.ask("A for a.m., B for p.m.")
 
+        
     }
 }
