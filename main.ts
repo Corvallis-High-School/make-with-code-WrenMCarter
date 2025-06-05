@@ -23,6 +23,8 @@ game.onUpdate(() => {
     // Arcade games run at 30 FPS
 });
 
+let startHours = ""
+let minutes = ""
 
 function finalHours(hours: number) {
 
@@ -75,13 +77,21 @@ function splitApart(baseText: string, first: boolean) {
 
 }
     
+function setUp(startwithmil: boolean) {
+    let message = ""
+    if (startwithmil) {
+        message = "Enter the time in millitary time:"
+    } else {
+        message =  "What time is it?"
+    }
+    let startTime = game.askForString(message, 5)
+    startHours = splitApart(startTime, true)
+    minutes = splitApart(startTime, false)
+}
 
-
+   
 if (game.ask("Military to Regular?")) {
-
-    let startTime = game.askForString("Enter the time in millitary time:", 5)
-    let startHours = splitApart(startTime, true)
-    let minutes = splitApart(startTime, false)
+    setUp(true)
     let ampm = findAMPM(parseInt(startHours))
     let finalHoursReg = finalHours(parseInt(startHours))
     let finalTime = finalHoursReg + minutes + " " + ampm
@@ -90,11 +100,10 @@ if (game.ask("Military to Regular?")) {
 } else {
 
     if (game.ask("Regular to Military?")) {
-        let regHours = game.askForNumber("Hours?", 2)
-        let regminutes = game.askForString("Minutes", 2)
+        setUp(false)
         let finalampm = game.ask("A for a.m., B for p.m.")
-        let milHours = regToMil(regHours, finalampm)
-        let milTime = milHours + ":" + regminutes
+        let milHours = regToMil(parseInt(startHours), finalampm)
+        let milTime = milHours + minutes
         game.splash(milTime)
     }
 
