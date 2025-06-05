@@ -25,7 +25,7 @@ game.onUpdate(() => {
 
 let startHours = ""
 let minutes = ""
-
+ 
 function finalHours(hours: number) {
 
     if ((hours % 12) == 0) {
