@@ -61,13 +61,29 @@ function regToMil(hours: number, am: boolean) {
         }
     }
 }
+
+function splitApart(baseText: string, first: boolean) {
+    let coolThing = ""
+    if (first) {
+         for (let i = 0; i <= 1; i++) {
+            coolThing = coolThing + baseText.charAt(i)
+        } 
+    } else {
+        for (let i = 2; i <= 5; i++) {
+            coolThing = coolThing + baseText.charAt(i)
+        }     
+    }
+
+    return parseInt(coolThing)
+}
     
 
 
 if (game.ask("Military to Regular?")) {
 
-    let startHours = game.askForNumber("Hours?", 2)
-    let minutes = game.askForString("Minutes", 2)
+    let startTime = game.askForString("Enter the time in millitary time:", 5)
+    let startHours = splitApart(startTime, true)
+    let minutes = splitApart(startTime, false)
     let ampm = findAMPM(startHours)
     let finalHoursReg = finalHours(startHours)
     let finalTime = finalHoursReg + ":" + minutes + " " + ampm
