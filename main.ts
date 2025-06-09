@@ -74,31 +74,18 @@ function characterLoop(characters: string, start: number, end: number) {
 }
 
 function splitApart(baseText: string, first: number) {
-    let oneDigit = false
 
-    if (baseText.charAt(2) == ":") {
-        oneDigit = true
+    if (first == 1) {
+        return characterLoop(baseText, 0, 1)
+     } else if (first == 2) {
+        return characterLoop(baseText, 2, 4)
+     } else {
+        return characterLoop(baseText, 6, 10)
     }
-    if (oneDigit) {
-        if (first == 1) {
-            return baseText.charAt(0)
-        } else if (first == 2) {
-            return characterLoop(baseText, 1, 3)
-        } else {
-            return characterLoop(baseText, 5, 9)
-        }
-    } else {
-        if (first == 1) {
-            return characterLoop(baseText, 0, 1)
-        } else if (first == 2) {
-            return characterLoop(baseText, 2, 4)
-        } else {
-            return characterLoop(baseText, 6, 10)
-        }
     
 
     }
-}
+
     
 function setUp(startwithmil: boolean) {
     let message = ""
@@ -109,7 +96,7 @@ function setUp(startwithmil: boolean) {
         lettercount = 5
     } else {
         message = "What time is it?"
-        game.splash("Enter time in this format: XX:XX x.m. or X:XX x.m.")
+        game.splash("Enter time in this format: XX:XX x.m.")
         lettercount = 10
     }
     startTime = game.askForString(message, lettercount)
