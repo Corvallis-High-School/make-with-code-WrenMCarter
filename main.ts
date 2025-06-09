@@ -89,8 +89,9 @@ function setUp(startwithmil: boolean) {
     minutes = splitApart(startTime, false)
 }
 
-   
-if (game.ask("Military to Regular?")) {
+let choice = game.askForNumber("1 for Military to Regular, 2 for Regular to Military", 1)
+
+if (choice == 1) {
     setUp(true)
     let ampm = findAMPM(parseInt(startHours))
     let finalHoursReg = finalHours(parseInt(startHours))
@@ -98,13 +99,11 @@ if (game.ask("Military to Regular?")) {
     game.splash(finalTime)
     
 } else {
+    setUp(false)
+    let finalampm = game.ask("A for a.m., B for p.m.")
+    let milHours = regToMil(parseInt(startHours), finalampm)
+    let milTime = milHours + minutes
+    game.splash(milTime)
 
-    if (game.ask("Regular to Military?")) {
-        setUp(false)
-        let finalampm = game.ask("A for a.m., B for p.m.")
-        let milHours = regToMil(parseInt(startHours), finalampm)
-        let milTime = milHours + minutes
-        game.splash(milTime)
-    }
 
 }
