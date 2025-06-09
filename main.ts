@@ -23,6 +23,7 @@ game.onUpdate(() => {
     // Arcade games run at 30 FPS
 });
 
+let startTime = ""
 let startHours = ""
 let minutes = ""
  
@@ -64,34 +65,50 @@ function regToMil(hours: number, am: boolean) {
     }
 }
 
-function splitApart(baseText: string, first: boolean) {
+function characterLoop(characters: string, start: number, end: number) {
     let part = ""
-    if (first) {
-        part = baseText.charAt(0) + baseText.charAt(1)
-        return part
-    } else {
-        part = baseText.charAt(2) + baseText.charAt(3) + baseText.charAt(4)
-        return part
+    for (let i = start; i <= end; i++) {
+        part = part + characters.charAt(i)
+    }
+    return part
+}
 
+function splitApart(baseText: string, first: number) {
+    if (first == 1) {
+        return characterLoop(baseText, 0, 1)
+    } else if (first == 2) {
+        return characterLoop(baseText, 2, 4)
+
+    } else {
+        return characterLoop(baseText, 6, 10)
     }
 
 }
     
 function setUp(startwithmil: boolean) {
     let message = ""
+    let lettercount = 0
     if (startwithmil) {
         message = "Enter the time in millitary time:"
+        game.splash("Enter time in this format: XX:XX")
+        lettercount = 5
     } else {
-        message =  "What time is it?"
+        message = "What time is it?"
+        game.splash("Enter time in this format: XX:XX x.m.")
+        lettercount = 10
     }
-    let startTime = game.askForString(message, 5)
-    startHours = splitApart(startTime, true)
-    minutes = splitApart(startTime, false)
+    startTime = game.askForString(message, lettercount)
+    startHours = splitApart(startTime, 1)
+    minutes = splitApart(startTime, 2)
+
 }
+
+
 
 let choice = game.askForNumber("1 for Military to Regular, 2 for Regular to Military", 1)
 
 if (choice == 1) {
+
     setUp(true)
     let ampm = findAMPM(parseInt(startHours))
     let finalHoursReg = finalHours(parseInt(startHours))
@@ -100,8 +117,13 @@ if (choice == 1) {
     
 } else {
     setUp(false)
-    let finalampm = game.ask("A for a.m., B for p.m.")
-    let milHours = regToMil(parseInt(startHours), finalampm)
+    let ampmboolean = true
+    
+    if (splitApart(startTime, 3) == "p.m.") {
+        ampmboolean = false
+    }
+    
+    let milHours = regToMil(parseInt(startHours), ampmboolean)
     let milTime = milHours + minutes
     game.splash(milTime)
 
