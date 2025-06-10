@@ -110,7 +110,7 @@ function setUp(startwithmil: boolean) {
         lettercount = 5
     } else {
         message = "What time is it?"
-        game.splash("Enter time in this format: XX:XX x.m.")
+        game.splash("Enter time in this format: X:XX x.m. or XX:XX x.m.")
         lettercount = 10
     }
     startTime = game.askForString(message, lettercount)
@@ -121,7 +121,7 @@ function setUp(startwithmil: boolean) {
 
 
 
-let choice = game.askForNumber("1 for Military to Regular, 2 for Regular to Military", 1)
+let choice = game.askForNumber("1 for military , 2 for regular starting", 1)
 
 if (choice == 1) {
 
