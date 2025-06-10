@@ -74,16 +74,20 @@ function characterLoop(characters: string, start: number, end: number) {
 }
 
 function splitApart(baseText: string, first: number) {
+    let oneStartingDigit = false
+    if (baseText.charAt(1) == ":") {
+        oneStartingDigit = true
+    }
+    if (oneStartingDigit) { }
 
     if (first == 1) {
         return characterLoop(baseText, 0, 1)
-     } else if (first == 2) {
+    } else if (first == 2) {
         return characterLoop(baseText, 2, 4)
-     } else {
+    } else {
         return characterLoop(baseText, 6, 10)
-    }
-    
-
+    }   
+  
     }
 
     
