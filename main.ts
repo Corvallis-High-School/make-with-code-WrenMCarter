@@ -52,7 +52,7 @@ function regToMil(hours: number, am: boolean) {
         if (hours == 12) {
             return "00"
         } else {
-            return hours + 12
+            return hours
         }
 
     } else {
@@ -75,7 +75,6 @@ function characterLoop(characters: string, start: number, end: number) {
 
 function splitApart(baseText: string, first: number) {
     let oneStartingDigit = false
-
     if (baseText.charAt(1) == ":") {
         oneStartingDigit = true
     }
@@ -86,18 +85,18 @@ function splitApart(baseText: string, first: number) {
         } else if (first == 2) {
             return characterLoop(baseText, 1, 3)
         } else {
-            return characterLoop(baseText, 5, 9)
+            return characterLoop(baseText, 5, 8)
         }
-    }
-
-    if (first == 1) {
-        return characterLoop(baseText, 0, 1)
-    } else if (first == 2) {
-        return characterLoop(baseText, 2, 4)
     } else {
-        return characterLoop(baseText, 6, 10)
+        if (first == 1) {
+            return characterLoop(baseText, 0, 1)
+        } else if (first == 2) {
+            return characterLoop(baseText, 2, 4)
+        } else {
+            return characterLoop(baseText, 6, 9)
     }   
   
+    }
     }
 
     
@@ -135,7 +134,7 @@ if (choice == 1) {
     setUp(false)
     let ampmboolean = true
 
-    if (splitApart(startTime, 3) == "p.m.") {
+    if (splitApart(startTime, 3) == "p.m." ) {
         ampmboolean = false
     }
     
